@@ -297,7 +297,7 @@ function kc(val,lbl,sub,vc,kk,proj_val){
 
 // ── NAV ──────────────────────────────────────────────────────
 const TABS={
-  ceo:     ['KPIs Consolidados','Plan de Trabajo','Avance Q','Avance Cargo Fijo','Gamma','Marcas','Proyección','Equipos & Ingresos'],
+  ceo:     ['KPIs Consolidados','Plan de Trabajo','Avance Q','Avance Cargo Fijo','Gamma','Marcas'],
   gerencia:['KPIs Consolidados','Avance Q','Cargo Fijo','Oportunidad'],
   jefatura:['Resumen','Avance Q','Cargo Fijo','Oportunidad Fija'],
   supervision:['Mi Tienda','Avance Q','Cargo Fijo','Oportunidad Fija']
@@ -344,7 +344,7 @@ function buildVP(){
 function buildTabs(){
   const tabs=TABS[cLvl]||[];
   document.getElementById('tabbar').innerHTML=tabs.map((t,i)=>{
-    const noData=(t==='Plan de Trabajo'||t==='Proyección')&&cM!=='TODOS'&&cM!=='Abr';
+    const noData=(t==='Plan de Trabajo'||t==='')&&cM!=='TODOS'&&cM!=='Abr';
     return `<button class="ttab${i===cTab?' act':''}${noData?' ttab-nd':''}" onclick="setTab(${i})">${t}${noData?' ⚠':''}</button>`;
   }).join('');
 }
@@ -406,8 +406,8 @@ function renderCEO(d,od,u,cf,eq){
         ${kc(oppPct+'%','% Oportunidad fija/movil','Conv. postpago → HFC','c-tl','k-tl',null)}
       </div>
       ${showProj?projBox([
-        {lbl:'Proyección Unidades Abr',val:fmt(projU),sub:'Base: '+fmt(aU.total)+' en 12 días'},
-        {lbl:'Proyección CF Abr',val:fmtS(projCF),sub:'Base: '+fmtS(Math.round(aCF.total))+' en 12 días'}
+        {lbl:' Unidades Abr',val:fmt(projU),sub:'Base: '+fmt(aU.total)+' en 12 días'},
+        {lbl:' CF Abr',val:fmtS(projCF),sub:'Base: '+fmtS(Math.round(aCF.total))+' en 12 días'}
       ]):''}
       <p class="sec-title" style="margin-top:4px">&#127968; Resumen por Tienda — ${mlbl}</p>
       <div class="tbl-wrap"><table class="dt">
